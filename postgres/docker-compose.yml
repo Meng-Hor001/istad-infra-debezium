@@ -1,0 +1,31 @@
+volumes:
+  ite-pg-vol:
+    driver: local
+
+networks:
+  ite-net:
+    external: true
+
+services:
+  kafka-postgres:
+    container_name: kafka-postgres
+    image: postgres:18.4
+    ports:
+      - "2543:5432"
+    environment:
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: postgres
+      POSTGRES_DB: kafka_db
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
+      - -c
+      - max_replication_slots=10
+      - -c
+      - max_wal_senders=10
+    volumes:
+      - ite-pg-vol:/var/lib/postgresql
+      - ./init_db/:/docker-entrypoint-initdb.d:ro
+    networks:
+      - ite-net

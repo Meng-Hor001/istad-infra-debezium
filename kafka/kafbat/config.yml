@@ -1,0 +1,4 @@
+kafka:
+  clusters:
+    - name: istad-local
+      bootstrapServers: kafka:9092

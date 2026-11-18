@@ -1,0 +1,28 @@
+volumes:
+  kafka-oracle-vol:
+    driver: local
+
+networks:
+  ite-net:
+    external: true
+
+services:
+  kafka-oracle:
+    container_name: kafka-oracle
+    image: gvenzl/oracle-free:23-slim
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: "OracleAdmin123"
+      APP_USER: kafka_sink
+      APP_USER_PASSWORD: "KafkaSink123"
+    volumes:
+      - kafka-oracle-vol:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    networks:
+      - ite-net
