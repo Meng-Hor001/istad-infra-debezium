@@ -1,11 +1,9 @@
 volumes:
   ite-pg-vol:
     driver: local
-
 networks:
   ite-net:
     external: true
-
 services:
   kafka-postgres:
     container_name: kafka-postgres
@@ -26,6 +24,6 @@ services:
       - max_wal_senders=10
     volumes:
       - ite-pg-vol:/var/lib/postgresql
-      - ./init_db/:/docker-entrypoint-initdb.d:ro
+      - ./init_db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     networks:
       - ite-net

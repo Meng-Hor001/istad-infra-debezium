@@ -1,4 +1,3 @@
-
 {
   "name": "postgres-source",
   "config": {
@@ -9,7 +8,7 @@
     "database.user": "debezium",
     "database.password": "debezium_local_password",
     "database.dbname": "kafka_db",
-    "topic.prefix": "kafka",
+    "topic.prefix": "kafka_v2",
     "plugin.name": "pgoutput",
     "slot.name": "kafka_customers_slot",
     "publication.name": "kafka_publication",
